@@ -1,0 +1,447 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ExamPrep Library | Competitive Exam Resources</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet"
+ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        navy: "#07111f",
+        panel: "#0d1b2e",
+        gold: "#fbbf24"
+      }
+    }
+  }
+};
+</script>
+
+<style>
+html { scroll-behavior: smooth; }
+body {
+  background: #07111f;
+  color: #e5edf8;
+  font-family: Inter, system-ui, Arial, sans-serif;
+}
+.glass {
+  background: rgba(13, 27, 46, .92);
+  border: 1px solid #203651;
+}
+.hero {
+  background:
+    radial-gradient(ellipse at top, #142d52 0%, #07111f 68%);
+}
+.gold-button {
+  background: #fbbf24;
+  color: #111827;
+  transition: .25s;
+}
+.gold-button:hover {
+  background: #fcd34d;
+  transform: translateY(-2px);
+}
+.book-card {
+  transition: transform .25s, border-color .25s, box-shadow .25s;
+}
+.book-card:hover {
+  transform: translateY(-5px);
+  border-color: #eab308;
+  box-shadow: 0 12px 35px #0005;
+}
+.category {
+  cursor: pointer;
+  transition: .2s;
+}
+.category:hover, .category.active {
+  border-color: #fbbf24;
+  background: #152944;
+}
+input, select { outline: none; }
+input:focus { border-color: #fbbf24; }
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<nav class="sticky top-0 z-50 border-b border-slate-800 bg-[#07111f]/95 backdrop-blur">
+  <div class="max-w-7xl mx-auto px-5 py-4 flex items-center justify-between gap-4">
+    <a href="#" class="text-xl sm:text-2xl font-extrabold tracking-tight">
+      <i class="fa-solid fa-book-open text-yellow-400 mr-2"></i>
+      ExamPrep<span class="text-yellow-400">Library</span>
+    </a>
+
+    <div class="hidden md:flex gap-7 text-sm font-medium text-slate-300">
+      <a href="#" class="hover:text-yellow-400">Home</a>
+      <a href="#categories" class="hover:text-yellow-400">Categories</a>
+      <a href="#books" class="hover:text-yellow-400">All Books</a>
+      <a href="#upload" class="hover:text-yellow-400">Upload PDF</a>
+    </div>
+
+    <a href="#books" class="gold-button rounded-lg px-3 sm:px-5 py-2.5 text-sm font-bold">
+      <i class="fa-solid fa-crown mr-1"></i> Premium
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero px-5 py-20 sm:py-24 text-center">
+  <div class="max-w-4xl mx-auto">
+    <span class="inline-block border border-blue-400/30 bg-blue-400/10 text-blue-300 rounded-full px-4 py-2 text-sm mb-6">
+      <i class="fa-solid fa-graduation-cap mr-2"></i>
+      Your preparation starts here
+    </span>
+
+    <h1 class="text-4xl sm:text-6xl font-extrabold leading-tight mb-6">
+      Master Your <span class="text-yellow-400">Competitive Exams</span>
+    </h1>
+
+    <p class="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto mb-9">
+      Explore exam preparation resources, syllabus-wise notes,
+      practice materials and reference PDFs in one place.
+    </p>
+
+    <form id="searchForm"
+      class="max-w-2xl mx-auto flex flex-col sm:flex-row gap-3 p-2 rounded-2xl glass">
+      <div class="flex items-center flex-1 px-3">
+        <i class="fa-solid fa-magnifying-glass text-slate-400 mr-3"></i>
+        <input id="searchInput" type="search"
+          placeholder="Search books, exams or subjects..."
+          class="bg-transparent w-full py-3 text-white placeholder-slate-500">
+      </div>
+      <button class="gold-button rounded-xl px-7 py-3 font-bold">
+        Search <i class="fa-solid fa-arrow-right ml-2"></i>
+      </button>
+    </form>
+
+    <div class="mt-6 flex flex-wrap justify-center gap-3 text-sm text-slate-400">
+      <span><i class="fa-solid fa-check text-emerald-400 mr-1"></i> Exam-focused resources</span>
+      <span><i class="fa-solid fa-check text-emerald-400 mr-1"></i> Easy navigation</span>
+      <span><i class="fa-solid fa-check text-emerald-400 mr-1"></i> Mobile-friendly</span>
+    </div>
+  </div>
+</header>
+
+<!-- CATEGORIES -->
+<section id="categories" class="max-w-7xl mx-auto px-5 py-16">
+  <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
+    <div>
+      <p class="text-yellow-400 text-sm font-semibold mb-2">EXPLORE RESOURCES</p>
+      <h2 class="text-3xl font-bold">Browse by Examination</h2>
+    </div>
+    <p class="text-slate-400 text-sm">Choose a category to filter books</p>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <button class="category active glass rounded-2xl p-6 text-left"
+      data-category="all">
+      <span class="w-12 h-12 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center text-xl mb-5">
+        <i class="fa-solid fa-landmark"></i>
+      </span>
+      <h3 class="font-bold text-lg">UPSC / Civil Services</h3>
+      <p class="text-slate-400 text-sm mt-2">Polity, history and general studies</p>
+    </button>
+
+    <button class="category glass rounded-2xl p-6 text-left"
+      data-category="banking">
+      <span class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl mb-5">
+        <i class="fa-solid fa-chart-line"></i>
+      </span>
+      <h3 class="font-bold text-lg">Banking & Insurance</h3>
+      <p class="text-slate-400 text-sm mt-2">Quantitative aptitude and reasoning</p>
+    </button>
+
+    <button class="category glass rounded-2xl p-6 text-left"
+      data-category="ssc">
+      <span class="w-12 h-12 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center text-xl mb-5">
+        <i class="fa-solid fa-train"></i>
+      </span>
+      <h3 class="font-bold text-lg">SSC & Railways</h3>
+      <p class="text-slate-400 text-sm mt-2">General knowledge and science</p>
+    </button>
+
+    <button class="category glass rounded-2xl p-6 text-left"
+      data-category="engineering">
+      <span class="w-12 h-12 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center text-xl mb-5">
+        <i class="fa-solid fa-code"></i>
+      </span>
+      <h3 class="font-bold text-lg">Engineering (GATE/JEE)</h3>
+      <p class="text-slate-400 text-sm mt-2">Technical concepts and practice</p>
+    </button>
+  </div>
+</section>
+
+<!-- BOOKS -->
+<section id="books" class="border-y border-slate-800 bg-[#091525] py-16">
+  <div class="max-w-7xl mx-auto px-5">
+    <div class="text-center mb-10">
+      <p class="text-yellow-400 text-sm font-semibold mb-2">STUDY SMARTER</p>
+      <h2 class="text-3xl sm:text-4xl font-bold">Latest Publications & Resources</h2>
+      <p class="text-slate-400 mt-3">Find useful materials for your exam preparation.</p>
+    </div>
+
+    <div class="flex flex-col sm:flex-row justify-between gap-4 mb-8">
+      <p id="resultCount" class="text-slate-400 text-sm self-center"></p>
+      <select id="sortSelect"
+        class="glass rounded-lg px-4 py-3 text-sm text-slate-200">
+        <option value="default">Sort: Featured</option>
+        <option value="az">Title: A to Z</option>
+      </select>
+    </div>
+
+    <div id="bookGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+
+      <!-- BOOK 1 -->
+      <article class="book-card book glass rounded-2xl overflow-hidden flex flex-col"
+        data-category="upsc" data-title="Indian Polity Constitution"
+        data-search="upsc civil services polity constitution history">
+        <div class="h-2 bg-blue-500"></div>
+        <div class="p-6 flex-1">
+          <div class="flex justify-between items-start mb-5">
+            <span class="text-xs font-bold uppercase tracking-wider text-blue-300 bg-blue-400/10 px-3 py-1.5 rounded-full">UPSC</span>
+            <i class="fa-solid fa-file-pdf text-red-400 text-xl"></i>
+          </div>
+          <div class="w-14 h-14 rounded-xl bg-blue-500/15 text-blue-300 flex items-center justify-center text-2xl mb-5">
+            <i class="fa-solid fa-landmark"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Indian Polity & Constitution</h3>
+          <p class="text-sm text-slate-400 mb-4">Conceptual summary</p>
+          <p class="text-slate-300 text-sm leading-6">
+            Review constitutional principles, historical background,
+            amendments and important polity concepts.
+          </p>
+        </div>
+        <div class="border-t border-slate-800 p-5 flex items-center justify-between gap-3">
+          <span class="text-xs text-slate-400">Reference resource</span>
+          <a href="pdfs/indian-polity.pdf" download
+            class="rounded-lg bg-blue-600 hover:bg-blue-500 px-4 py-2.5 text-sm font-bold">
+            <i class="fa-solid fa-download mr-2"></i>PDF
+          </a>
+        </div>
+      </article>
+
+      <!-- BOOK 2 -->
+      <article class="book-card book glass rounded-2xl overflow-hidden flex flex-col"
+        data-category="banking" data-title="Quantitative Aptitude Bank PO"
+        data-search="banking insurance quantitative aptitude ibps sbi mathematics">
+        <div class="h-2 bg-emerald-500"></div>
+        <div class="p-6 flex-1">
+          <div class="flex justify-between items-start mb-5">
+            <span class="text-xs font-bold uppercase tracking-wider text-emerald-300 bg-emerald-400/10 px-3 py-1.5 rounded-full">Banking</span>
+            <i class="fa-solid fa-file-pdf text-red-400 text-xl"></i>
+          </div>
+          <div class="w-14 h-14 rounded-xl bg-emerald-500/15 text-emerald-300 flex items-center justify-center text-2xl mb-5">
+            <i class="fa-solid fa-calculator"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Quantitative Aptitude Bank PO</h3>
+          <p class="text-sm text-slate-400 mb-4">ExamPrep Editorial</p>
+          <p class="text-slate-300 text-sm leading-6">
+            Practice arithmetic, data interpretation, shortcuts
+            and sample questions for banking examinations.
+          </p>
+        </div>
+        <div class="border-t border-slate-800 p-5 flex items-center justify-between gap-3">
+          <span class="text-xs text-slate-400">Practice resource</span>
+          <a href="pdfs/banking-aptitude.pdf" download
+            class="rounded-lg bg-blue-600 hover:bg-blue-500 px-4 py-2.5 text-sm font-bold">
+            <i class="fa-solid fa-download mr-2"></i>PDF
+          </a>
+        </div>
+      </article>
+
+      <!-- BOOK 3 -->
+      <article class="book-card book glass rounded-2xl overflow-hidden flex flex-col"
+        data-category="ssc" data-title="General Knowledge Science"
+        data-search="ssc railways general knowledge science gk current affairs">
+        <div class="h-2 bg-purple-500"></div>
+        <div class="p-6 flex-1">
+          <div class="flex justify-between items-start mb-5">
+            <span class="text-xs font-bold uppercase tracking-wider text-purple-300 bg-purple-400/10 px-3 py-1.5 rounded-full">SSC / Railways</span>
+            <i class="fa-solid fa-file-pdf text-red-400 text-xl"></i>
+          </div>
+          <div class="w-14 h-14 rounded-xl bg-purple-500/15 text-purple-300 flex items-center justify-center text-2xl mb-5">
+            <i class="fa-solid fa-atom"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">General Knowledge & Science</h3>
+          <p class="text-sm text-slate-400 mb-4">2026 edition resource</p>
+          <p class="text-slate-300 text-sm leading-6">
+            Revise general science, static GK, key facts and
+            essential concepts for competitive examinations.
+          </p>
+        </div>
+        <div class="border-t border-slate-800 p-5 flex items-center justify-between gap-3">
+          <span class="text-xs text-slate-400">Revision resource</span>
+          <a href="pdfs/general-knowledge.pdf" download
+            class="rounded-lg bg-blue-600 hover:bg-blue-500 px-4 py-2.5 text-sm font-bold">
+            <i class="fa-solid fa-download mr-2"></i>PDF
+          </a>
+        </div>
+      </article>
+
+      <!-- BOOK 4 -->
+      <article class="book-card book glass rounded-2xl overflow-hidden flex flex-col"
+        data-category="engineering" data-title="GATE Computer Science Basics"
+        data-search="engineering gate computer science programming algorithms dbms">
+        <div class="h-2 bg-rose-500"></div>
+        <div class="p-6 flex-1">
+          <div class="flex justify-between items-start mb-5">
+            <span class="text-xs font-bold uppercase tracking-wider text-rose-300 bg-rose-400/10 px-3 py-1.5 rounded-full">Engineering</span>
+            <i class="fa-solid fa-file-pdf text-red-400 text-xl"></i>
+          </div>
+          <div class="w-14 h-14 rounded-xl bg-rose-500/15 text-rose-300 flex items-center justify-center text-2xl mb-5">
+            <i class="fa-solid fa-laptop-code"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">GATE Computer Science Basics</h3>
+          <p class="text-sm text-slate-400 mb-4">Technical study resource</p>
+          <p class="text-slate-300 text-sm leading-6">
+            Organize revision for programming, algorithms, databases
+            and other core computer science subjects.
+          </p>
+        </div>
+        <div class="border-t border-slate-800 p-5 flex items-center justify-between gap-3">
+          <span class="text-xs text-slate-400">Technical resource</span>
+          <a href="pdfs/gate-computer-science.pdf" download
+            class="rounded-lg bg-blue-600 hover:bg-blue-500 px-4 py-2.5 text-sm font-bold">
+            <i class="fa-solid fa-download mr-2"></i>PDF
+          </a>
+        </div>
+      </article>
+    </div>
+
+    <p id="noResults" class="hidden text-center text-slate-400 py-12">
+      No matching books found. Try another search.
+    </p>
+  </div>
+</section>
+
+<!-- UPLOAD INFORMATION -->
+<section id="upload" class="max-w-5xl mx-auto px-5 py-16">
+  <div class="glass rounded-2xl p-8 sm:p-10 text-center">
+    <div class="w-16 h-16 rounded-2xl bg-yellow-400/10 text-yellow-400 flex items-center justify-center text-3xl mx-auto mb-5">
+      <i class="fa-solid fa-cloud-arrow-up"></i>
+    </div>
+    <h2 class="text-2xl sm:text-3xl font-bold mb-3">Add Your Study PDFs</h2>
+    <p class="text-slate-400 max-w-xl mx-auto mb-6">
+      Place your authorized PDF resources in the project's
+      <code class="text-yellow-300">pdfs</code> folder, then connect each
+      book card to the correct file path.
+    </p>
+    <p class="text-sm text-slate-500">
+      This is a static website. PDF uploads by visitors require a backend or
+      a separate file-storage service.
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="border-t border-slate-800 bg-[#050c16] py-9 px-5">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-5 justify-between items-center">
+    <a href="#" class="font-bold text-lg">
+      <i class="fa-solid fa-book-open text-yellow-400 mr-2"></i>
+      ExamPrep<span class="text-yellow-400">Library</span>
+    </a>
+    <p class="text-slate-500 text-sm text-center">
+      © 2026 ExamPrepLibrary. Educational resources for exam preparation.
+    </p>
+    <a href="#"
+      class="text-slate-400 hover:text-yellow-400 text-sm">
+      Back to top ↑
+    </a>
+  </div>
+  <p class="max-w-7xl mx-auto mt-5 text-xs text-slate-600 text-center">
+    Only share resources you own or are authorized to distribute.
+    Check permissions before hosting copyrighted books.
+  </p>
+</footer>
+
+<script>
+const searchInput = document.getElementById("searchInput");
+const searchForm = document.getElementById("searchForm");
+const books = [...document.querySelectorAll(".book")];
+const categories = [...document.querySelectorAll(".category")];
+const resultCount = document.getElementById("resultCount");
+const noResults = document.getElementById("noResults");
+const sortSelect = document.getElementById("sortSelect");
+const bookGrid = document.getElementById("bookGrid");
+
+let selectedCategory = "all";
+
+function filterBooks() {
+  const query = searchInput.value.trim().toLowerCase();
+  let visible = 0;
+
+  books.forEach(book => {
+    const category = book.dataset.category;
+    const text = (
+      book.dataset.title + " " +
+      book.dataset.search + " " +
+      book.innerText
+    ).toLowerCase();
+
+    const matchesCategory =
+      selectedCategory === "all" ||
+      category === selectedCategory ||
+      (selectedCategory === "upsc" && category === "upsc");
+
+    const matchesSearch = text.includes(query);
+    const show = matchesCategory && matchesSearch;
+
+    book.classList.toggle("hidden", !show);
+    if (show) visible++;
+  });
+
+  resultCount.textContent =
+    `Showing ${visible} resource${visible === 1 ? "" : "s"}`;
+  noResults.classList.toggle("hidden", visible !== 0);
+}
+
+categories.forEach(button => {
+  button.addEventListener("click", () => {
+    categories.forEach(item => item.classList.remove("active"));
+    button.classList.add("active");
+    selectedCategory = button.dataset.category;
+    filterBooks();
+    document.getElementById("books").scrollIntoView({ behavior: "smooth" });
+  });
+});
+
+searchForm.addEventListener("submit", event => {
+  event.preventDefault();
+  filterBooks();
+  document.getElementById("books").scrollIntoView({ behavior: "smooth" });
+});
+
+searchInput.addEventListener("input", filterBooks);
+
+sortSelect.addEventListener("change", () => {
+  if (sortSelect.value === "az") {
+    books.sort((a, b) =>
+      a.dataset.title.localeCompare(b.dataset.title)
+    );
+  } else {
+    books.sort((a, b) => Number(a.dataset.originalOrder) -
+                          Number(b.dataset.originalOrder));
+  }
+
+  books.forEach(book => bookGrid.appendChild(book));
+  filterBooks();
+});
+
+books.forEach((book, index) => {
+  book.dataset.originalOrder = index;
+});
+
+filterBooks();
+</script>
+
+</body>
+      </html>
+      
